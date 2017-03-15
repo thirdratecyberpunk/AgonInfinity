@@ -10,7 +10,7 @@ function Node(endPointX, endPointY){
   }
 }
 
-// responsible for rendering the album art itself
+// method responsible for rendering the album art itself
 function draw() {
   var canvas = document.getElementById('canvas');
   if (canvas.getContext) {
@@ -47,9 +47,10 @@ function draw() {
     // draws lines from every node to every other node
     for (i = 0; i < nodes.length; i++){
       ctx.moveTo(nodes[i].getNodeX(), nodes[i].getNodeY());
-      for (x = 0; x < nodes.length; x++){
-        // if it hasn't reached the last node in the array
-        console.log(x);
+      console.log("At node " + i)
+      for (x = i + 1; x < nodes.length; x++){
+        // if it hasn't reached the last node in the array, draw to the next node
+        console.log("Drawing to node  " + x);
         if (x + 1 != nodes.length){
           ctx.lineTo(nodes[x + 1].getNodeX(), nodes[x + 1].getNodeY());
         }
