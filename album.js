@@ -47,14 +47,18 @@ function draw() {
     // draws lines from every node to every other node
     for (i = 0; i < nodes.length; i++){
       ctx.moveTo(nodes[i].getNodeX(), nodes[i].getNodeY());
-      console.log(i);
-      if (i + 1 != nodes.length){
-        ctx.lineTo(nodes[i + 1].getNodeX(), nodes[i+1].getNodeY());
+      for (x = 0; x < nodes.length; x++){
+        // if it hasn't reached the last node in the array
+        console.log(x);
+        if (x + 1 != nodes.length){
+          ctx.lineTo(nodes[x + 1].getNodeX(), nodes[x + 1].getNodeY());
+        }
+        // if it has reached the last node, loop back around
+        else{
+          ctx.lineTo(nodes[0].getNodeX(), nodes[0].getNodeY());
+        }
+        ctx.stroke();
       }
-      else{
-        ctx.lineTo(nodes[0].getNodeX(), nodes[0].getNodeY());
-      }
-      ctx.stroke();
     }
   }
 }
