@@ -24,11 +24,11 @@ function draw() {
     var radians = 6.283/nodeNums;
     var startAngle = 0;
     var endAngle = 0;
+    var nodes = [];
     var nodeLocation = [];
     // defines colours for fill style
     ctx.fillStyle = 'rgb(365, 0, 0)';
     // renders nodes nodeNums times
-    var nodes = {};
     for (i = 0; i < nodeNums; i++){
       ctx.beginPath();
       endAngle = startAngle + radians;
@@ -37,13 +37,25 @@ function draw() {
       ctx.stroke();
       // gets the end of the arc
       nodeLocation = getPoint(250, 250, 125, endAngle);
-      var node = new Node(nodeLocation[0], nodeLocation[1]);
+      node = new Node(nodeLocation[0], nodeLocation[1]);
+      nodes.push(node);
       // creates a circle centred at the end of the arc
       ctx.arc(node.getNodeX(),node.getNodeY(),5,0,2*Math.PI);
       ctx.stroke();
       startAngle = endAngle;
     }
     // draws lines from every node to every other node
+    for (i = 0; i < nodes.length; i++){
+      ctx.moveTo(nodes[i].getNodeX(), nodes[i].getNodeY());
+      console.log(i);
+      if (i + 1 != nodes.length){
+        ctx.lineTo(nodes[i + 1].getNodeX(), nodes[i+1].getNodeY());
+      }
+      else{
+        ctx.lineTo(nodes[0].getNodeX(), nodes[0].getNodeY());
+      }
+      ctx.stroke();
+    }
   }
 }
 
