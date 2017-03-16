@@ -32,11 +32,8 @@ function draw() {
     for (i = 0; i < nodeNums; i++){
       ctx.beginPath();
       endAngle = startAngle + radians;
-      // creates the arc used to define the centre of the node
-      ctx.arc(250, 250, 125, startAngle, endAngle);
-      ctx.stroke();
-      // gets the end of the arc
-      nodeLocation = getPoint(250, 250, 125, endAngle);
+      // gets the position of the node based on a hypothetical circle
+      nodeLocation = getPoint(250, 250, 200, endAngle);
       node = new Node(nodeLocation[0], nodeLocation[1]);
       nodes.push(node);
       // creates a circle centred at the end of the arc
@@ -47,20 +44,23 @@ function draw() {
     // draws lines from every node to every other node
     for (i = 0; i < nodes.length; i++){
       ctx.moveTo(nodes[i].getNodeX(), nodes[i].getNodeY());
-      console.log("At node " + i)
-      for (x = i + 1; x < nodes.length; x++){
+      console.log("Current node: X position " +  nodes[i].getNodeX()+ " Y position " + nodes[i].getNodeY());
+      for (x = i + 1; x <= nodes.length; x++){
         // if it hasn't reached the last node in the array, draw to the next node
-        console.log("Drawing to node  " + x);
-        if (x + 1 != nodes.length){
-          ctx.lineTo(nodes[x + 1].getNodeX(), nodes[x + 1].getNodeY());
+        if (x < nodes.length){
+          console.log("Drawing to X position " +  nodes[x].getNodeX()+ " Y position " + nodes[x].getNodeY());
+          //console.log("Not the last node");
+          ctx.lineTo(nodes[x].getNodeX(), nodes[x].getNodeY());
         }
         // if it has reached the last node, loop back around
         else{
+          console.log("Reached the last node");
           ctx.lineTo(nodes[0].getNodeX(), nodes[0].getNodeY());
         }
-        ctx.stroke();
+        ctx.moveTo(nodes[i].getNodeX(), nodes[i].getNodeY());
       }
     }
+    ctx.stroke();
   }
 }
 
