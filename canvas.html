@@ -6,7 +6,16 @@
   <script type="application/javascript" src="album.js">
   </script>
  </head>
- <body onload="draw();">
+ <body onload="draw(9);">
    <canvas id="canvas" width="500" height="500"></canvas>
+   <p> Number of nodes (3- 50)</p>
+   <input type="range"  min="3" max="50" value="9" onchange="draw(this.value); showValue(this.value)">
+   <span id="range">9</span>
+   <script type="text/javascript">
+    function showValue(newValue)
+    {
+	     document.getElementById("range").innerHTML=newValue;
+     }
+</script>
  </body>
 </html>

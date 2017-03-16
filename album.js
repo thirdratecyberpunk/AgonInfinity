@@ -11,14 +11,14 @@ function Node(endPointX, endPointY){
 }
 
 // method responsible for rendering the album art itself
-function draw() {
+function draw(nodeNums) {
   var canvas = document.getElementById('canvas');
   if (canvas.getContext) {
     var ctx = canvas.getContext('2d');
-
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     // number of nodes to create lines to and from
     // 9 used as default parameter because Nonagon
-    var nodeNums = 9;
+    this.nodeNums = nodeNums;
 
     // calculates the radians for the arc to populate the circle with
     var radians = 6.283/nodeNums;
@@ -37,8 +37,8 @@ function draw() {
       node = new Node(nodeLocation[0], nodeLocation[1]);
       nodes.push(node);
       // creates a circle centred at the end of the arc
-      ctx.arc(node.getNodeX(),node.getNodeY(),5,0,2*Math.PI);
-      ctx.stroke();
+      //ctx.arc(node.getNodeX(),node.getNodeY(),5,0,2*Math.PI);
+      //ctx.fill();
       startAngle = endAngle;
     }
     // draws lines from every node to every other node
